@@ -745,15 +745,21 @@ PUZZLE.logic.InitPuzzle = function(width, height, tileDivider, gap, rootId)
     var dom = PUZZLE.logic.DomCreation(width, height, puzzleEntity); 
 
     // Append puzzle to the DOM
-    document.getElementById(rootId).appendChild(dom);
-    var arrow = $('#rightArrow, #leftArrow, #upArrow, #downArrow');
+    var root = document.getElementById(rootId);
 
-    //arrow.fadeOut();
-    PUZZLE.logic.ShowHideArrow(puzzleEntity, arrow);
+    if(root != undefined)
+    {
+        root.appendChild(dom);
+        var arrow = $('#rightArrow, #leftArrow, #upArrow, #downArrow');
 
-    PUZZLE.logic.BindArrowClick(puzzleEntity);
-
-    return puzzleEntity;
+        PUZZLE.logic.ShowHideArrow(puzzleEntity, arrow);
+        PUZZLE.logic.BindArrowClick(puzzleEntity);
+        return puzzleEntity;
+    }
+    else
+    {
+        return null;
+    }
 }
 
 

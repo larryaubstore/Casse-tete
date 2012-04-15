@@ -275,7 +275,6 @@ function viewModel(data) {
         var tileClassSelector = $("[id*=TILE_], .transparentTile");
 
         // On enlève les styles pour faciliter le visionnement
-        //tileClassSelector.addClass("tile", 750);
         tileClassSelector.addClass("shadow", 250);
 
         // Afficher/Cacher bouton
@@ -286,13 +285,6 @@ function viewModel(data) {
 
 
 $(document).ready(function() {
-
-    //var tileWrapper = $(".tilewrapper");
-    //alert(tileWrapper.width());
-
-	//var width = $("#photo").attr("width");
-	//var height = $("#photo").attr("height");
-
 	var width = 799;
 	var height = 570;
     var tileDivider = 4;
