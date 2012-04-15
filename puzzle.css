@@ -1,0 +1,197 @@
+.tile {
+	position:absolute;
+}
+
+.border {
+	border:1px solid white;
+}
+
+.tilewrapper {
+	margin: 0 auto 25px;
+	width: 799px;
+    /*width:100%;*/
+	height: 100%;
+
+}
+
+.position {
+
+	position:relative;
+	/*overflow:hidden;*/
+
+	/*width:799px;*/
+	/*height: 570px;*/
+    /*height:100%;*/
+    /*width:100%;*/
+
+}
+
+.tileimage
+{
+	background-image: url(index.php_files/20110403143837_rouedentelee.jpg);
+}
+
+.tileposition
+{
+	background-image: url(index.php_files/20110403143837_rouedentelee.jpg);
+	background-position: 150px 200px;
+	width: 50px;
+	height: 50px;
+	/* float:left; */
+	position:absolute;
+	left:150px;
+}
+
+.tileposition2
+{
+	background-image: url(index.php_files/20110403143837_rouedentelee.jpg);
+	background-position: 100px 200px;
+	width: 50px;
+	height: 50px;
+	/* float:left; */
+	position:absolute;
+	left:100px;
+}
+
+.arrow-up {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid white;
+}
+
+.arrow-down {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid white;
+}
+
+.arrow-right {
+	width: 0;
+	height: 0;
+	border-top: 25px solid transparent;
+	border-bottom: 25px solid transparent;
+	border-left: 25px solid white;
+	position:absolute;
+	left:152px;
+	top:1px;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+
+}
+
+.arrow-left {
+	width: 0;
+	height: 0;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent; 
+	border-right:5px solid white;
+}
+
+
+
+.arrow-right-empty {
+	width: 0;
+	height: 0;
+	position:absolute;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+	z-index:1;
+}
+
+
+.arrow-left-empty {
+	width: 0;
+	height: 0;
+	position:absolute;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+	z-index:1;
+}
+
+
+.arrow-down-empty {
+	width: 0;
+	height: 0;
+	position:absolute;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+	z-index:1;
+}
+
+
+.arrow-up-empty {
+	width: 0;
+	height: 0;
+	position:absolute;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+	z-index:1;
+}
+
+.transparentTile {
+	opacity:0.4;
+	filter:alpha(opacity=40);
+    background-color:#ffffff;
+}
+
+.redTile {
+	opacity:0.2;
+	filter:alpha(opacity=20);
+    background-color:red;
+}
+
+
+
+
+.shadow {
+    box-shadow: 5px 5px 5px black; 
+    border-radius:15px;
+}
+
+/*
+.disableHover {
+    box-shadow: 5px 5px 5px black; 
+}
+*/
+
+.enableHover {
+    box-shadow: inset 10px 10px 10px black;
+}
+
+/* minimal
+*******************************************************************************/
+button.minimal {
+  background: #e3e3e3;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+  -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+  box-shadow: inset 0 0 1px 1px #f6f6f6;
+  color: #333;
+  font: bold 12px "helvetica neue", helvetica, arial, sans-serif;
+  line-height: 1;
+  padding: 8px 0 9px;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+  width: 150px; }
+  button.minimal:hover {
+    background: #d9d9d9;
+    -webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+    -moz-box-shadow: inset 0 0 1px 1px #eaeaea;
+    box-shadow: inset 0 0 1px 1px #eaeaea;
+    color: #222;
+    cursor: pointer; }
+  button.minimal:active {
+    background: #d0d0d0;
+    -webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+    -moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
+    box-shadow: inset 0 0 1px 1px #e3e3e3;
+    color: #000; }
+
+
