@@ -19,7 +19,7 @@
 function viewModel(data) {
 
 
-    this.EnableHover = function(parent, data) {
+    this.EnableHover = function (parent, data) {
 
         var sel = $("#" + parent.IdName(data, parent));
 
@@ -293,4 +293,3 @@ $(document).ready(function() {
                                                height, 
                                                tileDivider, 9, "puzzle");
 });
-
