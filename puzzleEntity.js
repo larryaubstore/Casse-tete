@@ -14,30 +14,31 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/      
+*/
 
+/*global clearInterval: false, clearTimeout: false, document: false, event: false, frames: false, history: false, Image: false, location: false, name: false, navigator: false, Option: false, parent: false, screen: false, setInterval: false, setTimeout: false, window: false, XMLHttpRequest: false, $: false */
 
 var PUZZLE = PUZZLE || {};
 
 
-    PUZZLE.PuzzleEntity = function(tileWidth, 
-                    tileHeight, 
-                    dataTiles, 
+PUZZLE.PuzzleEntity = function (tileWidth,
+                    tileHeight,
+                    dataTiles,
                     rowTileCount,
                     colTileCount,
                     positions,
                     initialPosition,
-                    gap) {  
-            return {
-                TileWidth: tileWidth,                          
-                TileHeight: tileHeight,   
-                Tiles: dataTiles,                                       
-                RowTileCount: rowTileCount,                             
-                ColTileCount: colTileCount,   
-                Positions: positions,
-                InitialPosition: initialPosition,
-                EmptyPositionRandom: initialPosition,
-                Gap: gap
-            };
-    }       
-
+                    gap) {
+    "use strict";
+    return {
+        TileWidth: tileWidth,
+        TileHeight: tileHeight,
+        Tiles: dataTiles,
+        RowTileCount: rowTileCount,
+        ColTileCount: colTileCount,
+        Positions: positions,
+        InitialPosition: initialPosition,
+        EmptyPositionRandom: initialPosition,
+        Gap: gap
+    };
+};

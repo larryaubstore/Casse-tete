@@ -19,7 +19,7 @@
 /*global clearInterval: false, clearTimeout: false, document: false, event: false, frames: false, history: false, Image: false, location: false, name: false, navigator: false, Option: false, parent: false, screen: false, setInterval: false, setTimeout: false, window: false, XMLHttpRequest: false, $: false */
 
 var PUZZLE = PUZZLE || {};
-PUZZLE.logic = {};
+PUZZLE.logic =  PUZZLE.logic || {};
 
 PUZZLE.logic.GetTileWidth = function (width, tileDivider) {
     "use strict";
@@ -584,112 +584,108 @@ PUZZLE.logic.LeftArrowVisible = function (position, puzzleEntity) {
     return result;
 };
 
-PUZZLE.logic.DownArrowVisible = function(position, puzzleEntity) {
-
-	if(position == 
-	(puzzleEntity.Positions[puzzleEntity.EmptyPositionRandom - puzzleEntity.RowTileCount]))
-	{
-		return true;
+PUZZLE.logic.DownArrowVisible = function (position, puzzleEntity) {
+    "use strict";
+    var result;
+	if (position === (puzzleEntity.Positions[puzzleEntity.EmptyPositionRandom - puzzleEntity.RowTileCount])) {
+		result =  true;
+	} else {
+		result =  false;
 	}
-	else
-	{
-		return false;
-	}
-}
+    return result;
+};
 
-PUZZLE.logic.UpArrowVisible = function(position, puzzleEntity) {
-
+PUZZLE.logic.UpArrowVisible = function (position, puzzleEntity) {
+    "use strict";
+    var result;
     // devrait etre 5 au lieu de 9
-	if(position == 
-	(puzzleEntity.Positions[puzzleEntity.EmptyPositionRandom + puzzleEntity.RowTileCount] ))
-	{
-		return true;
+	if (position === (puzzleEntity.Positions[puzzleEntity.EmptyPositionRandom + puzzleEntity.RowTileCount])) {
+		result = true;
+	} else {
+		result =  false;
 	}
-	else
-	{
-		return false;
-	}
-}
+    return result;
+};
 
-PUZZLE.logic.PositionX = function(tile, model) {
-    return(tile.FrontPositionX*model.TileWidth + model.Gap*tile.FrontPositionX)
-}
+PUZZLE.logic.PositionX = function (tile, model) {
+    "use strict";
+    return (tile.FrontPositionX * model.TileWidth + model.Gap * tile.FrontPositionX);
+};
 
-PUZZLE.logic.PositionXStyle = function(tile, model)
-{
-    return(this.PositionX(tile, model) + "px");
-}
+PUZZLE.logic.PositionXStyle = function (tile, model) {
+    "use strict";
+    return (this.PositionX(tile, model) + "px");
+};
 
-PUZZLE.logic.PositionY = function(tile, model) {
-    return(tile.FrontPositionY*model.TileHeight + model.Gap*tile.FrontPositionY)
-}
+PUZZLE.logic.PositionY = function (tile, model) {
+    "use strict";
+    return (tile.FrontPositionY * model.TileHeight + model.Gap * tile.FrontPositionY);
+};
 
-PUZZLE.logic.PositionYStyle = function(tile, model)
-{
-    return(this.PositionY(tile, model) + "px");
-}
+PUZZLE.logic.PositionYStyle = function (tile, model) {
+    "use strict";
+    return (this.PositionY(tile, model) + "px");
+};
 
-PUZZLE.logic.IdName = function(position, model) {
-	return("TILE_" + position);
-}
+PUZZLE.logic.IdName = function (position, model) {
+    "use strict";
+	return ("TILE_" + position);
+};
 
-PUZZLE.logic.TileSizeStyleX = function(model) {
-	return(model.TileWidth + "px");
-}
+PUZZLE.logic.TileSizeStyleX = function (model) {
+    "use strict";
+	return (model.TileWidth + "px");
+};
 
-PUZZLE.logic.TileSizeStyleY = function(model) {
-	return(model.TileHeight + "px");
-}
+PUZZLE.logic.TileSizeStyleY = function (model) {
+    "use strict";
+	return (model.TileHeight + "px");
+};
 
-PUZZLE.logic.BackGroundPos = function(tile, model) {
-   	return(((tile.BackPositionX*model.TileWidth)*-1) 
-	+ "px" + " " + (tile.BackPositionY*model.TileHeight*-1) + "px");
-}
+PUZZLE.logic.BackGroundPos = function (tile, model) {
+    "use strict";
+    return (((tile.BackPositionX * model.TileWidth) * -1) + "px" + " " + (tile.BackPositionY * model.TileHeight * -1) + "px");
+};
 
-PUZZLE.logic.InitPuzzle = function(width, height, tileDivider, gap, rootId)
-{
-    var tileWidth = PUZZLE.logic.GetTileWidth(width, tileDivider);
-    var tileHeight = PUZZLE.logic.GetTileHeight(height, tileDivider);
-    var xTilesCount = PUZZLE.logic.GetXTilesCount(width, tileWidth);
-    var yTilesCount = PUZZLE.logic.GetYTilesCount(height, tileHeight);
+PUZZLE.logic.InitPuzzle = function (width, height, tileDivider, gap, rootId) {
+    "use strict";
+    var tileWidth, tileHeight, xTilesCount, yTilesCount, randomPosition, tileArray, puzzleEntity, randomList, dom, root, arrow, result;
+    tileWidth = PUZZLE.logic.GetTileWidth(width, tileDivider);
+    tileHeight = PUZZLE.logic.GetTileHeight(height, tileDivider);
+    xTilesCount = PUZZLE.logic.GetXTilesCount(width, tileWidth);
+    yTilesCount = PUZZLE.logic.GetYTilesCount(height, tileHeight);
 
-    var randomPosition = parseInt(xTilesCount / 2) +
-        parseInt( (yTilesCount / 2) * xTilesCount );
+    randomPosition = parseInt(xTilesCount / 2, 10) + parseInt((yTilesCount / 2) * xTilesCount, 10);
 
-    var tileArray = PUZZLE.logic.GetTileArrays(xTilesCount, yTilesCount, randomPosition);
+    tileArray = PUZZLE.logic.GetTileArrays(xTilesCount, yTilesCount, randomPosition);
 
-    var puzzleEntity = PUZZLE.PuzzleEntity(tileWidth,
-                    tileHeight, 
+    puzzleEntity = PUZZLE.PuzzleEntity(tileWidth,
+                    tileHeight,
                     tileArray.PointerArray,
                     xTilesCount,
                     yTilesCount,
                     tileArray.PositionArray,
-                    randomPosition, 
-                    gap); 
+                    randomPosition,
+                    gap);
 
     
-    var randomList = PUZZLE.logic.GetRandomList(20);
+    randomList = PUZZLE.logic.GetRandomList(20);
 
     PUZZLE.logic.Randomize(puzzleEntity, randomList);
 
-    var dom = PUZZLE.logic.DomCreation(width, height, puzzleEntity); 
+    dom = PUZZLE.logic.DomCreation(width, height, puzzleEntity);
 
     // Append puzzle to the DOM
-    var root = document.getElementById(rootId);
+    root = document.getElementById(rootId);
 
-    if(root != undefined)
-    {
+    if (root !== undefined) {
         root.appendChild(dom);
-        var arrow = $('#rightArrow, #leftArrow, #upArrow, #downArrow');
+        arrow = $('#rightArrow, #leftArrow, #upArrow, #downArrow');
 
         PUZZLE.logic.ShowHideArrow(puzzleEntity, arrow);
         PUZZLE.logic.BindArrowClick(puzzleEntity);
-        return puzzleEntity;
+        result = puzzleEntity;
+    } else {
+        result = null;
     }
-    else
-    {
-        return null;
-    }
-}
-
-
+};

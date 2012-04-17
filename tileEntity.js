@@ -14,13 +14,14 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/      
+*/
 
+/*global clearInterval: false, clearTimeout: false, document: false, event: false, frames: false, history: false, Image: false, location: false, name: false, navigator: false, Option: false, parent: false, screen: false, setInterval: false, setTimeout: false, window: false, XMLHttpRequest: false, $: false */
 
 var PUZZLE = PUZZLE || {};
 
-PUZZLE.TileEntity = function(backPositionX, backPositionY, position) {  
-
+PUZZLE.TileEntity = function (backPositionX, backPositionY, position) {
+    "use strict";
     return {
         BackPositionX: backPositionX,
 	    BackPositionY: backPositionY,
@@ -28,4 +29,4 @@ PUZZLE.TileEntity = function(backPositionX, backPositionY, position) {
         FrontPositionX: backPositionX,
         FrontPositionY: backPositionY
     };
-}
+};

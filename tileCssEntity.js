@@ -14,25 +14,26 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/      
+*/
 
+/*global clearInterval: false, clearTimeout: false, document: false, event: false, frames: false, history: false, Image: false, location: false, name: false, navigator: false, Option: false, parent: false, screen: false, setInterval: false, setTimeout: false, window: false, XMLHttpRequest: false, $: false */
 
 var PUZZLE = PUZZLE || {};
 
 
-    PUZZLE.TileCssEntity = function(left, 
-                    top, 
-                    width, 
+PUZZLE.TileCssEntity = function (left,
+                    top,
+                    width,
                     height,
                     backgroundPosition,
-                    classesName) {  
-            return {
-                Left: left,                          
-                Top: top,   
-                Width: width,                                       
-                Height: height,                             
-                BackgroundPosition: backgroundPosition,   
-                ClassesName: classesName 
-            };
-    }       
-
+                    classesName) {
+    "use strict";
+    return {
+        Left: left,
+        Top: top,
+        Width: width,
+        Height: height,
+        BackgroundPosition: backgroundPosition,
+        ClassesName: classesName
+    };
+};
