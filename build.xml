@@ -1,0 +1,30 @@
+
+
+<project name="Puzzle"  basedir=".">
+    <property name="build" value="build"/>
+    <property name="yui-compressor-jar" value="lib/yuicompressor-2.4.7.jar" />
+
+    <target name="check-yui-compressor">
+        <available file="${yui-compressor-jar}" property="yuicompressor.present"/>
+    </target>
+
+    <target name="combine" depends="check-yui-compressor" if="yuicompressor.present">
+        <mkdir dir="${build}"/>
+        <concat destfile="${build}\combined.js" append="true">
+            <fileset dir=".">
+                <include name="*.js" />
+            </fileset>
+        </concat>
+    </target>
+
+    <target name="minify" depends="combine">
+        <java jar="${yui-compressor-jar}" fork="true">
+            <arg line="${build}/combined.js -o ${build}/casse-tete.min.js"/>
+        </java>
+        <delete file="${build}/combined.js"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build}"/>
+    </target>
+</project>
