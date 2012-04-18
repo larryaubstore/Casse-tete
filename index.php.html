@@ -8,23 +8,29 @@
 
 <script type="text/javascript" src="jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="jquery/jquery-ui-1.8.17.custom.min.js"></script>
+<script type="text/javascript" src="build/casse-tete.min.js"></script>
 
-<script type="text/javascript" src="tileCssEntity.js"></script>
-<script type="text/javascript" src="puzzleEntity.js"></script>
-<script type="text/javascript" src="tileEntity.js"></script>
-<script type="text/javascript" src="puzzleLogic.js"></script>
-<script type="text/javascript" src="puzzle.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var width, height, tileDivider, puzzleEntity;
+    	width = 799;
+	    height = 570;
+        tileDivider = 4;
 
+        puzzleEntity = PUZZLE.logic.InitPuzzle(width,
+                                               height,
+                                               tileDivider, 9, "puzzle");
+    });
+</script>
 
 </head>
 
 <body>
+
 <div id="puzzle" style="height:800px;width:100%;padding:20px;">
-
-
 </div>
 
-    <div id="showErrorsBtn" style="height:50px; ">Show errors</div>
-    <div id="hideErrorsBtn" style="height:50px; ">Hide errors</div>
+<div id="showErrorsBtn" style="height:50px; ">Show errors</div>
+<div id="hideErrorsBtn" style="height:50px; ">Hide errors</div>
 
 </body></html>

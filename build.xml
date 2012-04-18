@@ -2,7 +2,7 @@
 
 <project name="Puzzle"  basedir=".">
     <property name="build" value="build"/>
-    <property name="yui-compressor-jar" value="lib/yuicompressor-2.4.7.jar" />
+    <property name="yui-compressor-jar" value="lib/yuicompressor/yuicompressor-2.4.7.jar" />
 
     <target name="check-yui-compressor">
         <available file="${yui-compressor-jar}" property="yuicompressor.present"/>
