@@ -451,7 +451,8 @@ PUZZLE.logic.ShowHideArrow = function (puzzleEntity, selector) {
 
 PUZZLE.logic.Collapse = function (event) {
     "use strict";
-    var puzzleEntity, tiles, positions, tile, selector, deltaX, concat, arrow, xPosition, yPosition, scope, tileRed, i, position, concatY, tileClassSelector;
+    var puzzleEntity, tiles, positions, tile, selector, deltaX, concat, arrow, xPosition, yPosition, scope, tileRed, i, position, concatY, tileClassSelector,
+        showErrorsBtn, hideErrorsBtn;
     puzzleEntity = event.data.puzzleEntity;
     tiles = puzzleEntity.Tiles;
     positions = puzzleEntity.Positions;
@@ -460,11 +461,15 @@ PUZZLE.logic.Collapse = function (event) {
 
     // Sélecteur pour les flèches
     arrow = $('#rightArrow, #leftArrow, #upArrow, #downArrow');
-
+    showErrorsBtn = $("#showErrorsBtn");
+    hideErrorsBtn = $("#hideErrorsBtn");
 
     scope = puzzleEntity;
 
-
+    // On fait disparaitre le bouton.
+    showErrorsBtn.fadeOut(250, function () {
+        hideErrorsBtn.fadeIn(250);
+    });
     // On fait disparaître les flèches
     arrow.fadeOut(250);
 
@@ -504,13 +509,20 @@ PUZZLE.logic.Collapse = function (event) {
 
 PUZZLE.logic.Expand = function (event) {
     "use strict";
-    var puzzleEntity, tiles, positions, tile, selector, deltaX, concat, arrow, xPosition, yPosition, i, position, tileRed, concatY, tileClassSelector, cbShowHideArrow;
+    var puzzleEntity, tiles, positions, tile, selector, deltaX, concat, arrow, xPosition, yPosition, i, position, tileRed, concatY, tileClassSelector, cbShowHideArrow,
+        hideErrorsBtn, showErrorsBtn;
     puzzleEntity = event.data.puzzleEntity;
     tiles = puzzleEntity.Tiles;
     positions = puzzleEntity.Positions;
 
     // Sélecteur pour les flèches
     arrow = $('#rightArrow, #leftArrow, #upArrow, #downArrow');
+    hideErrorsBtn = $("#hideErrorsBtn");
+    showErrorsBtn = $("#showErrorsBtn");
+
+    hideErrorsBtn.fadeOut(250, function () {
+        showErrorsBtn.fadeIn(250);
+    });
 
     cbShowHideArrow = function showHideArrow() {
         // On fait apparaître les flèches
@@ -649,7 +661,7 @@ PUZZLE.logic.BackGroundPos = function (tile, model) {
 
 PUZZLE.logic.InitPuzzle = function (width, height, tileDivider, gap, rootId) {
     "use strict";
-    var tileWidth, tileHeight, xTilesCount, yTilesCount, randomPosition, tileArray, puzzleEntity, randomList, dom, root, arrow, result;
+    var tileWidth, tileHeight, xTilesCount, yTilesCount, randomPosition, tileArray, puzzleEntity, randomList, dom, root, arrow, result, hideErrorsBtn;
     tileWidth = PUZZLE.logic.GetTileWidth(width, tileDivider);
     tileHeight = PUZZLE.logic.GetTileHeight(height, tileDivider);
     xTilesCount = PUZZLE.logic.GetXTilesCount(width, tileWidth);
@@ -681,6 +693,10 @@ PUZZLE.logic.InitPuzzle = function (width, height, tileDivider, gap, rootId) {
     if (root !== undefined) {
         root.appendChild(dom);
         arrow = $('#rightArrow, #leftArrow, #upArrow, #downArrow');
+        // Hide "Hide Error" bouton
+        hideErrorsBtn = $("#hideErrorsBtn");
+        hideErrorsBtn.hide();
+        
 
         PUZZLE.logic.ShowHideArrow(puzzleEntity, arrow);
         PUZZLE.logic.BindArrowClick(puzzleEntity);

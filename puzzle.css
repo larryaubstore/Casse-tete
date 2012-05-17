@@ -42,3 +42,43 @@
 .enableHover {
     box-shadow: inset 10px 10px 10px black;
 }
+
+
+/* web designer wall => webdesignerwall.com */
+.button {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em .55em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em; 
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.button:hover {
+    text-decoration: none;
+}
+.button:active {
+    position: relative;
+    top: 1px;
+}
+
+.white {
+    background: -moz-linear-gradient(center top , #FFFFFF, #EDEDED) repeat scroll 0 0 transparent;
+    border: 1px solid #B7B7B7;
+    color: #606060;
+}
+.white:hover {
+    background: -moz-linear-gradient(center top , #FFFFFF, #DCDCDC) repeat scroll 0 0 transparent;
+}
+.white:active {
+    background: -moz-linear-gradient(center top , #EDEDED, #FFFFFF) repeat scroll 0 0 transparent;
+    color: #999999;
+}
+/**/
