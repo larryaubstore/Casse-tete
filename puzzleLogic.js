@@ -688,4 +688,5 @@ PUZZLE.logic.InitPuzzle = function (width, height, tileDivider, gap, rootId) {
     } else {
         result = null;
     }
+    return result;
 };

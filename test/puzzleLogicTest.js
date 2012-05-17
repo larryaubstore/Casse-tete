@@ -14,12 +14,16 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/      
+*/
+
+
+/*global clearInterval: false, clearTimeout: false, document: false, event: false, frames: false, history: false, Image: false, location: false, name: false, navigator: false, Option: false, parent: false, screen: false, setInterval: false, setTimeout: false, window: false, XMLHttpRequest: false, $: false, module: false, test: false */
 
 
 module("puzzleLogic");
-test("X Tiles Count", function() {
+test("X Tiles Count", function () {
 
+    "use strict";
     var width = 799;
     var tileWidth = PUZZLE.logic.GetTileWidth(width, 4);
     var xTilesCount = PUZZLE.logic.GetXTilesCount(width, tileWidth);
@@ -46,8 +50,8 @@ test("Tile Array", function() {
     
     //    0   1   2   3
     //    4   5   6   7
-    //    8   9  -1  10
-    //    11  12  13  14
+    //    8   9   10  11
+    //    12  13  14  15
     var tileArray = PUZZLE.logic.GetTileArrays(4, 4, 10);
 
     var positionArray = tileArray.PositionArray;
@@ -56,31 +60,9 @@ test("Tile Array", function() {
     for(var i = 0; i < 16; i++)
     {
 
-        if( i < 10)
-        {
-            equal(i,
-                positionArray[i],  
-                'Expected ' + (i) + ' as the result, result was: ' + positionArray[i]);
-        }
-        else if( i > 10)
-        {
-            equal(i,
-                positionArray[i],  
-                'Expected ' + (i) + ' as the result, result was: ' + positionArray[i]);
-        }
-        //else if( i > 10)
-        //{
-
-        //    equal(i-1,
-        //        positionArray[i],  
-        //        'Expected ' + (i-1) + ' as the result, result was: ' + positionArray[i]);
-        //}
-        else
-        {
-            equal(-1,
-                positionArray[i],  
-                'Expected -1 as the result, result was: ' + positionArray[i]);
-        }
+        equal(i,
+            positionArray[i],  
+            'Expected ' + (i) + ' as the result, result was: ' + positionArray[i]);
     }
 
     // Results expected:    0, 1, 2, 3
@@ -89,20 +71,10 @@ test("Tile Array", function() {
     //                      0, 1, 2, 3
     for(i = 0; i < 16; i++)
     {
-            //if(i < 10)
-            //{
-                equal(i % 4,
-                    pointerArray[i].BackPositionX,  
-                    'Tiles Array: Expected ' + ( i % 4 ) + 
-                    ' as the result, result was: ' + pointerArray[i].BackPositionX);
-            //}
-            //else
-            //{
-
-            //    equal((i+1) % 4,
-            //        pointerArray[i].BackPositionX,  
-            //        'Expected ' + ( (i+1) % 4 ) + ' as the result, result was: ' + pointerArray[i].BackPositionX);
-            //}
+        equal(i % 4,
+            pointerArray[i].BackPositionX,  
+            'Tiles Array: Expected ' + ( i % 4 ) + 
+            ' as the result, result was: ' + pointerArray[i].BackPositionX);
     }
 
 
@@ -113,7 +85,7 @@ test("Move left", function() {
 
     //    0   1   2   3
     //    4   5   6   7
-    //    8   9  -1  11
+    //    8   9   10  11
     //    12  13  14  15
 
     var width = 799;
@@ -148,16 +120,16 @@ test("Move left", function() {
         positions[9],
         'Initial position: Expected 9 as the result, result was: ' + positions[9]);
 
-    equal(-1,
+    equal(10,
         positions[10],
-        'Initial position: Expected -1 as the result, result was: ' + positions[10]);
+        'Initial position: Expected 10 as the result, result was: ' + positions[10]);
 
     // Go left
     var posNext = PUZZLE.logic.GoLeft(puzzleEntity);
 
     //    0   1   2   3
     //    4   5   6   7
-    //    8   9   11  -1 
+    //    8   9   11  10 
     //    12  13  14  15
     
   
@@ -165,9 +137,9 @@ test("Move left", function() {
         positions[10],
         'Second position: Expected 11 as the result, result was: ' + positions[10]);
 
-    equal(-1,
+    equal(10,
         positions[11],
-        'Second position: Expected -1 as the result, result was: ' + positions[11]);
+        'Second position: Expected 10 as the result, result was: ' + positions[11]);
 });
 
 
@@ -177,19 +149,19 @@ test("Test Randomize", function() {
     // 1
         //    0   1   2   3
         //    4   5   6   7
-        //    8   9  -1  11
+        //    8   9   10  11
         //    12  13  14  15
 
     // 2
         //    0   1   2   3
         //    4   5   6   7
-        //    8   -1  9   11
+        //    8   10  9   11
         //    12  13  14  15
 
     // 3
         //    0   1   2   3
         //    4   5   6   7
-        //    -1  8   9   11
+        //    10  8   9   11
         //    12  13  14  15
 
     var width = 799;
@@ -242,11 +214,11 @@ test("Test Randomize", function() {
 
     //    0   1   2   3
     //    4   5   6   7
-    //    -1  8   9   11
+    //    10  8   9   11
     //    12  13  14  15
-    equal(-1,
+    equal(10,
         positions[8],
-        '[LEFT TEST] Expected -1 as the result, result was: ' + positions[8]);
+        '[LEFT TEST] Expected 10 as the result, result was: ' + positions[8]);
 
     equal(8,
         positions[9],
@@ -268,7 +240,7 @@ test("Test Randomize", function() {
     // 1
         //    0   1   2   3
         //    4   5   6   7
-        //    8   9  -1  11
+        //    8   9  10  11
         //    12  13  14  15
     equal(8,
         positions[8],
@@ -290,23 +262,23 @@ test("Test Randomize", function() {
     // 1
         //    0   1   2   3
         //    4   5   6   7
-        //    8   9  -1  11
+        //    8   9  10  11
         //    12  13  14  15
 
     // 2
         //    0   1   2   3
-        //    4   5  -1   7
+        //    4   5  10   7
         //    8   9   6   11
         //    12  13  14  15
 
     // 3
-        //    0   1  -1   3
+        //    0   1  10   3
         //    4   5   2   7
         //    8   9   6   11
         //    12  13  14  15
-    equal(-1,
+    equal(10,
         positions[2],
-        '[UP TEST] Expected -1 as the result, result was: ' + positions[2]);
+        '[UP TEST] Expected 10 as the result, result was: ' + positions[2]);
     equal(2,
         positions[6],
         '[UP TEST] Expected 2 as the result, result was: ' + positions[6]);
@@ -323,7 +295,7 @@ test("Test Randomize", function() {
     // 1
         //    0   1   2   3
         //    4   5   6   7
-        //    8   9  -1  11
+        //    8   9  10  11
         //    12  13  14  15
     var downList = [4, 4];
     PUZZLE.logic.Randomize(puzzleEntity, downList);
@@ -331,9 +303,9 @@ test("Test Randomize", function() {
     equal(6,
         positions[6],
         '[DOWN TEST] Expected 6 as the result, result was: ' + positions[6]);
-    equal(-1,
+    equal(10,
         positions[10],
-        '[DOWN TEST] Expected -1 as the result, result was: ' + positions[10]);
+        '[DOWN TEST] Expected 10 as the result, result was: ' + positions[10]);
 
     equal(0,
         tiles[2].FrontPositionY,
@@ -371,9 +343,9 @@ test("Test Randomize", function() {
         tiles[10].FrontPositionY,
         '[LIMIT UP TEST] FrontPositionY: Expected 0 as the result, result was: ' + tiles[10].FrontPositionY);
 
-    equal(-1,
+    equal(10,
         positions[0],
-        'Expected -1 as the result, result was: ' + positions[0]);
+        'Expected 10 as the result, result was: ' + positions[0]);
 
 
 });
@@ -475,7 +447,7 @@ test("DOM creation", function() {
     // 7 --> 7
     // 8 --> 8
     // 9 --> 9
-    // 10 -> -1
+    // 10 -> 10 
     // 11 -> 11
     // 12 -> 12
     // 13 -> 13
