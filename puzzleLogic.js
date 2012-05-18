@@ -451,12 +451,14 @@ PUZZLE.logic.ShowHideArrow = function (puzzleEntity, selector) {
 
 PUZZLE.logic.Collapse = function (event) {
     "use strict";
-    var puzzleEntity, tiles, positions, tile, selector, deltaX, concat, arrow, xPosition, yPosition, scope, tileRed, i, position, concatY, tileClassSelector,
+    var puzzleEntity, tiles, positions, tile, selector,
+        deltaX, concat, arrow, xPosition, yPosition,
+        scope, tileRed, i, position, concatY, tileClassSelector,
         showErrorsBtn, hideErrorsBtn;
+
     puzzleEntity = event.data.puzzleEntity;
     tiles = puzzleEntity.Tiles;
     positions = puzzleEntity.Positions;
-
 
 
     // Sélecteur pour les flèches
@@ -479,6 +481,7 @@ PUZZLE.logic.Collapse = function (event) {
         tileRed = $("#TILE_" + position);
         tileRed.removeClass("redTile");
 
+        // Mark visually the tiles that are at the wrong position
         if (i !== position) {
             tileRed.addClass("redTile");
         }
@@ -486,6 +489,7 @@ PUZZLE.logic.Collapse = function (event) {
         // Tous les "tiles" sauf l'emplacement vide
         if (position !== -1) {
             tile = tiles[position];
+
 
             // Sélecteur pour le "tile"
             selector = $("#TILE_" + position);
@@ -507,6 +511,7 @@ PUZZLE.logic.Collapse = function (event) {
     tileClassSelector.removeClass("shadow", 750);
 };
 
+
 PUZZLE.logic.Expand = function (event) {
     "use strict";
     var puzzleEntity, tiles, positions, tile, selector, deltaX, concat, arrow, xPosition, yPosition, i, position, tileRed, concatY, tileClassSelector, cbShowHideArrow,
@@ -526,7 +531,6 @@ PUZZLE.logic.Expand = function (event) {
 
     cbShowHideArrow = function showHideArrow() {
         // On fait apparaître les flèches
-        //arrow.fadeIn(250);
         PUZZLE.logic.ShowHideArrow(puzzleEntity, arrow);
     };
 
@@ -559,19 +563,99 @@ PUZZLE.logic.Expand = function (event) {
     tileClassSelector = $("[id*=TILE_], .transparentTile");
 
     // On enlève les styles pour faciliter le visionnement
-    //tileClassSelector.addClass("tile", 750);
     tileClassSelector.addClass("shadow", 250);
 };
+
+PUZZLE.logic.Compare = function (event) {
+    "use strict";
+    var puzzleEntity, tiles, positions, tile, selector,
+        deltaX, concat, arrow, xPosition, yPosition,
+        scope, tileRed, i, position, concatY, tileClassSelector,
+        showErrorsBtn, hideErrorsBtn, factor,
+        widthHalf, heightHalf;
+
+    puzzleEntity = event.data.puzzleEntity;
+    tiles = puzzleEntity.Tiles;
+    positions = puzzleEntity.Positions;
+
+
+    // Sélecteur pour les flèches
+    arrow = $('#rightArrow, #leftArrow, #upArrow, #downArrow');
+    showErrorsBtn = $("#showErrorsBtn");
+    hideErrorsBtn = $("#hideErrorsBtn");
+
+    scope = puzzleEntity;
+
+    // On fait disparaitre le bouton.
+    showErrorsBtn.fadeOut(250, function () {
+        hideErrorsBtn.fadeIn(250);
+    });
+    // On fait disparaître les flèches
+    arrow.fadeOut(250);
+
+    for (i = 0; i <= tiles.length; i += 1) {
+        position = positions[i];
+
+        tileRed = $("#TILE_" + position);
+        tileRed.removeClass("redTile");
+
+        // Mark visually the tiles that are at the wrong position
+        //if (i !== position) {
+        //    tileRed.addClass("redTile");
+        //}
+
+        // Tous les "tiles" sauf l'emplacement vide
+        if (position !== -1) {
+            tile = tiles[position];
+
+
+            // Sélecteur pour le "tile"
+            selector = $("#TILE_" + position);
+            factor = 0.5;
+            
+            //selector.width(selector.width() * factor);
+            //selector.height(selector.height() * factor);
+            widthHalf = selector.width() * factor;
+            heightHalf = selector.height() * factor;
+
+
+            // Calculer les position des "tiles"
+            xPosition = parseInt(i % scope.RowTileCount, 10);
+            yPosition = parseInt(i / scope.RowTileCount, 10);
+
+            concat =   parseInt(xPosition * scope.TileWidth * factor, 10) + "px";
+            concatY =  parseInt(yPosition * scope.TileHeight * factor, 10) + "px";
+
+            selector.animate({ left:  concat, top: concatY,
+                width: widthHalf, height: heightHalf }, 1500);
+
+        }
+    }
+
+    // On sélectionne tous les "tiles"
+    tileClassSelector = $(".tile");
+    // On enlève les styles pour faciliter le visionnement
+    tileClassSelector.removeClass("shadow", 750);
+};
+
 
 
 PUZZLE.logic.BindArrowClick = function (puzzleEntity) {
     "use strict";
-    $("#rightArrow").bind('click', {puzzleEntity: puzzleEntity}, PUZZLE.logic.ClicDroit);
-    $("#leftArrow").bind('click', {puzzleEntity: puzzleEntity}, PUZZLE.logic.ClicGauche);
-    $("#upArrow").bind('click', {puzzleEntity: puzzleEntity}, PUZZLE.logic.ClicUp);
-    $("#downArrow").bind('click', {puzzleEntity: puzzleEntity}, PUZZLE.logic.ClicDown);
-    $("#hideErrorsBtn").bind('click', {puzzleEntity: puzzleEntity}, PUZZLE.logic.Expand);
-    $("#showErrorsBtn").bind('click', {puzzleEntity: puzzleEntity}, PUZZLE.logic.Collapse);
+    $("#rightArrow").bind('click', {puzzleEntity: puzzleEntity},
+        PUZZLE.logic.ClicDroit);
+    $("#leftArrow").bind('click', {puzzleEntity: puzzleEntity},
+        PUZZLE.logic.ClicGauche);
+    $("#upArrow").bind('click', {puzzleEntity: puzzleEntity},
+        PUZZLE.logic.ClicUp);
+    $("#downArrow").bind('click', {puzzleEntity: puzzleEntity},
+        PUZZLE.logic.ClicDown);
+    $("#hideErrorsBtn").bind('click', {puzzleEntity: puzzleEntity},
+        PUZZLE.logic.Expand);
+    $("#showErrorsBtn").bind('click', {puzzleEntity: puzzleEntity},
+        PUZZLE.logic.Collapse);
+    $("#compareBtn").bind('click', {puzzleEntity: puzzleEntity},
+        PUZZLE.logic.Compare);
 };
 
 PUZZLE.logic.RightArrowVisible = function (position, puzzleEntity) {
